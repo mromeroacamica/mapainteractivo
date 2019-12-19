@@ -8,7 +8,33 @@ geocodificadorModulo = (function () {
      y que llame a la función pasada por parámetro con los siguientes parámetros
      dirección: la dirección pasada por parámetro
      coordenada: la ubicación de tipo google.maps.LatLng */
+     var objeto ={
+       address:direccion
+     }
+     var key= 'key=AIzaSyDTfWoZ39dmK79XCBZgEK1Vl3jzYc3k2SU'
+     var ubicacion;
+     var ubicacionLatLng;
+     var url = `https://maps.googleapis.com/maps/api/geocode/json?`;
+
+fetch(url+'address='+objeto.address+'&'+key,{
+  method: 'GET'
+})
+.then(data=>{return data.json()})
+.then(Response=>{
+  // console.log(Response)
+  ubicacion=Response.results;
+  // console.log(ubicacion);
+  ubicacion.forEach(element => {
+    // console.log(element.geometry.location);
+    ubicacionLatLng= new google.maps.LatLng(element.geometry.location)
+    funcionALlamar(objeto.address,ubicacionLatLng)
+  });
+})
+.catch(error=>{console.log(error)});
+
+       
   }
+  
 
     // Inicializo el geocoder que obtiene las corrdenadas a partir de una dirección
     // La variable dirección es igual al texto ingresado por el usuario

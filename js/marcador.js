@@ -125,6 +125,8 @@ miMarcador=marker;
         // el nombre y la valuación del lugar si es que lo tienen.
     var lugarLoc = lugar.geometry.location
     google.maps.event.addListener(marcador, 'click', function () {
+      // console.log(lugar)
+      // console.log(lugarLoc)
       streetViewModulo.fijarStreetView(lugarLoc)
       var valuacion = 'No tiene'
       if (lugar.rating) {
@@ -204,6 +206,7 @@ miMarcador=marker;
     }
 
     function agregarMarcadorConStreetView (direccion, ubicacion) {
+      console.log(ubicacion)
       var marcador = new google.maps.Marker({
         map: mapa,
         position: ubicacion,
@@ -215,7 +218,9 @@ miMarcador=marker;
       })
       limites.extend(ubicacion)
       google.maps.event.addListener(marcador, 'click', function () {
+        // console.log(marcador);
         streetViewModulo.fijarStreetView(marcador.position)
+        // console.log(marcador.position)
       })
 
       marcadoresRuta.push(marcador)

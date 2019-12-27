@@ -12,11 +12,11 @@ streetViewModulo = (function () {
     /* Completar la función fijarStreetView que actualiza la posición
      de la variable panorama y cambia el mapa de modo tal que se vea
      el streetView de la posición actual. */
-     console.log(ubicacion)
+    //  console.log(ubicacion)
 
     var panorama = new google.maps.StreetViewPanorama(
       document.getElementById('pano'), {
-      position: posicionCentral,
+      position: ubicacion,
       pov: {
         heading: 34,
         pitch: 10

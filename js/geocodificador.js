@@ -1,3 +1,4 @@
+var ubicacionLatLng;
 geocodificadorModulo = (function () {
   var geocodificador // Geocodificador que dada una dirección devuelve una coordenada
   
@@ -13,7 +14,6 @@ geocodificadorModulo = (function () {
      }
      var key= 'key=AIzaSyDTfWoZ39dmK79XCBZgEK1Vl3jzYc3k2SU'
      var ubicacion;
-     var ubicacionLatLng;
      var url = `https://maps.googleapis.com/maps/api/geocode/json?`;
 
 fetch(url+'address='+objeto.address+'&'+key,{
@@ -27,6 +27,7 @@ fetch(url+'address='+objeto.address+'&'+key,{
   ubicacion.forEach(element => {
     // console.log(element.geometry.location);
     ubicacionLatLng= new google.maps.LatLng(element.geometry.location)
+    // console.log(ubicacionLatLng)
     funcionALlamar(objeto.address,ubicacionLatLng)
   });
 })

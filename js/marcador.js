@@ -5,12 +5,27 @@ marcadorModulo = (function () {
   var limites // Límites del mapa
   var infoVentana // La ventana con información
 
+  // var ubicacionPrueba= {
+  //   lat: -31.367373,
+  //   lng: -64.2393605
+  // };
+  // console.log(ubicacionPrueba)
     // Crea un marcador y lo muestra en el mapa
   function mostrarMiMarcador (ubicacion) {
         /* Completar la función mostrarMiMarcador() para crear un marcador
         en la posición pasada por parámetro y mostrarlo en el mapa.
         Este marcador debe tener un título, una animación.
         El marcador que vas a crear debe asignarse a la variable miMarcador */
+var marker =new google.maps.Marker({
+  position:ubicacionLatLng,
+  map:mapa,
+  animation:google.maps.Animation.DROP,
+  title:'hello world'
+})
+miMarcador=marker;
+// console.log(ubicacionLatLng)
+// console.log(miMarcador)
+
   }
 
     // Agrega la dirección del marcador en la lista de Lugares Intermedios
@@ -157,6 +172,7 @@ marcadorModulo = (function () {
         // Muestra marcador cuando se presioná enteren el campo direccion
     $('#direccion').keypress(function (e) {
       if (e.keyCode == 13) {
+        // console.log(e.target.value)
         marcadorModulo.mostrarMiMarcador()
       }
     })
@@ -171,7 +187,10 @@ marcadorModulo = (function () {
 
     // Devuelve la posicion de la variable miMarcador
   function damePosicion () {
-    return miMarcador.getPosition()
+    // console.log(miMarcador.getPosition())
+    var prueba= {lat:miMarcador.internalPosition.lat(), lng:miMarcador.internalPosition.lng() }
+    // console.log(prueba)
+    return prueba
   }
 
     // Agrego el marcador con la ruta. Le asigna las letras correspondientes al marcador.
@@ -218,12 +237,18 @@ marcadorModulo = (function () {
 
     // Marco los lugares cerca de mi posición
   function marcar () {
+    // console.log(marcadores)
     borrarMarcadores(marcadores)
     console.log('lugar: ' + document.getElementById('tipoDeLugar').value)
+    console.log(marcadorModulo.existeMiMarcador())
+    tipoLugar= document.getElementById('tipoDeLugar').value;
     if (marcadorModulo.existeMiMarcador()) {
+      // console.log(miMarcador)
       var miPosicion = marcadorModulo.damePosicion()
+      
     } else {
       miPosicion = posicionCentral
+      console.log(miPosicion)
     }
     lugaresModulo.buscarCerca(miPosicion)
         // cambio el centro del mapa a miPosicion
@@ -241,3 +266,5 @@ marcadorModulo = (function () {
     marcar
   }
 })()
+
+var tipoLugar;
